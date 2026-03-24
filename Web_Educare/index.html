@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDUCARE NUSIN 2 - RSUD dr. Adhyatma, MPH</title>
+    <style>
+        :root {
+            --primary-color: #4CAF50; /* Hijau sesuai logo */
+            --secondary-color: #FF7043; /* Oranye sesuai logo */
+            --bg-light: #f4f7f6;
+            --text-dark: #333;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+            padding: 10px 20px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-section img {
+            height: 50px;
+        }
+
+        .logo-text h1 {
+            font-size: 1.2rem;
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            margin: 0;
+            color: #666;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            margin-left: 20px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('NUSA INDAHjpg.jpg.jpeg') center/cover;
+            color: var(--white);
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        /* About Section - DENGAN BACKGROUND GAMBAR RUANGAN */
+        .about {
+            /* Memanggil gambar ruangan yang diupload */
+            background: linear-gradient(rgba(244, 247, 246, 0.85), rgba(244, 247, 246, 0.85)), url('WhatsApp Image 2026-03-22 at 20.15.27.jpeg') center/cover no-repeat fixed;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: auto;
+            background-color: var(--white); /* Memberi kotak putih agar tulisan terbaca */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .about-content h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        /* Education Lists */
+        .education-section {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            border-bottom: 2px solid var(--secondary-color);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        /* CARD SEKARANG MENJADI LINK (a) AGAR BISA DIKLIK */
+        a.card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            border-left: 5px solid var(--primary-color);
+            cursor: pointer;
+            text-decoration: none; /* Menghilangkan garis bawah pada link */
+            color: inherit; /* Warna teks tidak berubah jadi biru */
+            display: block; /* Agar seluruh kotak bisa diklik */
+        }
+
+        a.card.spiritual {
+            border-left: 5px solid var(--secondary-color);
+        }
+
+        a.card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+
+        a.card h3 {
+            margin-top: 0;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo-section">
+                <img src="WhatsApp Image 2026-03-18 at 00.00.47.jpeg" alt="Logo RSUD">
+                <div class="logo-text">
+                    <h1>RSUD dr. Adhyatma, MPH</h1>
+                    <p>Rumah Sakit Umum Daerah</p>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="#">HOME</a>
+                <a href="#">PROFIL</a>
+                <a href="#">KONTAK</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h2>Hi, Selamat Datang

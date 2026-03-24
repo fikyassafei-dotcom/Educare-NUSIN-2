@@ -1,0 +1,724 @@
+ <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDUCARE NUSIN 2 - RSUD dr. Adhyatma, MPH</title>
+    <style>
+        :root {
+            --primary-color: #689F38; /* Hijau daun */
+            --secondary-color: #F57C00; /* Oranye */
+            --bg-light: #f4f7f6;
+            --text-dark: #333;
+            --white: #ffffff;
+        }
+
+        /* Agar scroll halus saat menu diklik */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Jarak agar konten tidak tertutup navbar saat discroll */
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+            padding: 10px 20px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-section img {
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .logo-text h1 {
+            font-size: 1.2rem;
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            margin: 0;
+            color: #666;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            margin-left: 20px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('NUSA INDAHjpg.jpg.jpeg') center/cover no-repeat;
+            color: var(--white);
+            text-align: center;
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about {
+            background: linear-gradient(rgba(244, 247, 246, 0.9), rgba(244, 247, 246, 0.9)), url(Nusa\ Indah\ 2\ Bacground.jpeg) center/cover fixed;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: auto;
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .about-content h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .teks-rata { text-align: justify; }
+        .gambar-responsif { max-width: 100%; height: auto; border-radius: 8px; margin: 15px 0; }
+
+        /* --- EDUCATION SECTION --- */
+        .education-section {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            border-bottom: 3px solid var(--secondary-color);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--primary-color);
+            cursor: pointer;
+        }
+
+        .card.spiritual { border-left: 5px solid var(--secondary-color); }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+
+        .card span.read-more {
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--white);
+            background-color: var(--primary-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .card.spiritual span.read-more { background-color: var(--secondary-color); }
+
+        /* --- MODAL (POPUP) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 700px;
+            position: relative;
+            animation: slideDown 0.4s ease;
+        }
+
+        @keyframes slideDown {
+            from {transform: translateY(-50px); opacity: 0;}
+            to {transform: translateY(0); opacity: 1;}
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover { color: #000; }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #222;
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <header>
+        <div class="nav-container">
+            <div class="logo-section">
+                <img src="WhatsApp Image 2026-03-18 at 00.00.47.jpeg" alt="Logo RSUD">
+                <div class="logo-text">
+                    <h1>RSUD dr. Adhyatma, MPH</h1>
+                    <p>Provinsi Jawa Tengah</p>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="#home">HOME</a>
+                <a href="#profil">PROFIL</a>
+                <a href="#kontak">KONTAK</a>
+                <a href="#tim-kreatif">TIM KREATIF</a>
+            </div>
+        </div>
+   
+    <section id="home" class="hero">
+        <h2>Hi, Selamat Datang di EDUCARE NUSIN 2</h2>
+        <p>Platform Edukasi Kesehatan Interaktif & Modern</p>
+    </section>
+
+        
+    </section>
+    <section class="about">
+        <div class="about-content">
+                <section id="profil" class="about">
+            <h2>About Us "Nusa Indah 2"</h2>
+            <p>Bangsal Nusa Indah 2 merupakan salah satu bangsal rawat inap bedah yang berada di wilayah RSUD dr. Adhyatma, MPH yang letaknya di lantai 2 gedung Nusa Indah. Ruang Nusa Indah 2 merupakan bangsal rawat inap bedah kelas I untuk pasien dewasa laki-laki maupun perempuan. Ruangan Bangsal yang mempunyai kapasitas 15 tempat tidur dengan 13 kamar dan 1 kamar One Day Care yang terisi 2 tempat tidur, Untuk kamar mandi pasien setiap ruangan terdapat 1 kamar mandi dalam. </p>
+        <h2>VISI</h2>
+        <P>"Menjadi ruang rawat inap yang prima, mandiri, dan terdepan dalam pelayanan keperawatan pasien bedah yang aman, bermutu dan profesional"</P>
+         <h2>MISI</h2>
+<style>
+  .teks-rata {
+    text-align: justify;
+  }
+</style>
+         <p class="teks-rata">1) Ruang perawatan bedah yang bermutu dan mengembang kan pelayanan unggulan.</p>
+         <p class="teks-rata">2) Menyelenggarakan dan mengembangkan pendidikan serta penelitian di bidang keperawatan dan pelayaan pasien bedah.</p>
+         <p class="teks-rata">3) Meningkatkan profesionalisme sumber daya manusia agar berdaya saing dalam pelayaan dan pendidikan.</p>
+         <p class="teks-rata">4) Mengembangkan sarana dan prasarana ruang rawat inap yang aman, nyaman, dan mendukung pemulihan pasien bedah.</p>      
+     <h2>Denah Ruangan</h2>
+      <style>
+  .gambar-responsif {
+    max-width: 100%; /* Gambar tidak akan melebihi lebar layar */
+    height: auto;    /* Tinggi otomatis mengikuti lebar agar proporsional */
+    border-radius: 8px; /* Bonus: bikin sudutnya melengkung */
+  }
+</style>
+
+<img src="denah ruangan.png" alt="Denah Ruangan Nusa Indah 2" class="gambar-responsif">
+        </div>
+    </section>
+
+    <section class="education-section">
+        
+        <div style="text-align: center;">
+            <h2 class="section-title">Bagian 1: Edukasi Pre & Post Operasi</h2>
+        </div>
+        <div class="grid">
+            <div class="card" onclick="openModal('modal-pre-1')">
+                <h3>1. Persiapan Sebelum Operasi</h3>
+                <span class="read-more">Selengkapnya &rarr;</span>
+            </div>
+            <div class="card" onclick="openModal('modal-pre-2')">
+                <h3>2. Puasa Sebelum Operasi</h3>
+                <span class="read-more">Selengkapnya &rarr;</span>
+            </div>
+            <div class="card" onclick="openModal('modal-post-3')">
+                <h3>3. Pemenuhan Kebutuhan Nutrisi setelah Operasi</h3>
+                <span class="read-more">Selengkapnya &rarr;</span>
+            </div>
+            <div class="card" onclick="openModal('modal-post-4')">
+                <h3>4. Pengaturan Posisi Setelah Operasi</h3>
+                <span class="read-more">Selengkapnya &rarr;</span>
+            </div>
+            <div class="card" onclick="openModal('modal-post-6')">
+                <h3>5. Manajemen Nyeri setelah operasi</h3>
+                <span class="read-more">Selengkapnya &rarr;</span>
+            </div>
+            <div class="card" onclick="openModal('modal-post-7')">
+                <h3>6. Kapan Bisa Makan & Minum Setelah Operasi</h3>
+                <span class="read-more">Selengkapnya &rarr;</span>
+            </div>
+            <div class="card" onclick="openModal('modal-post-8')">
+                <h3>7. Mobilisasi Dini atau Gerakan setelah Operasi </h3>
+                <span class="read-more">Selengkapnya &rarr;</span>
+            </div>
+            <div class="card" onclick="openModal('modal-post-9')">
+                <h3>8. Perawatan Pascaoperasi </h3>
+                <span class="read-more">Selengkapnya &rarr;</span>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <h2 class="section-title" style="color: var(--secondary-color); border-bottom-color: var(--primary-color);">Bagian 2: Kebutuhan Spiritual</h2>
+        </div>
+        <div class="grid">
+            <div class="card spiritual" onclick="openModal('modal-spi-5')">
+                <h3>1. Panduan Bersuci dari Hadast bagi Orang Sakit</h3>
+                <span class="read-more">Selengkapnya &rarr;</span>
+            </div>
+            <div class="card spiritual" onclick="openModal('modal-spi-1')">
+                <h3>2. Tata Cara Tayamum</h3>
+                <span class="read-more">Selengkapnya &rarr;</span>
+            </div>
+            <div class="card spiritual" onclick="openModal('modal-spi-2')">
+                <h3>3. Tata Cara Sholat Saat Sakit</h3>
+                <span class="read-more">Selengkapnya &rarr;</span>
+            </div>
+            <div class="card spiritual" onclick="openModal('modal-spi-3')">
+                <h3>4. Doa Menjenguk Orang Sakit</h3>
+                <span class="read-more">Selengkapnya &rarr;</span>
+            </div>
+            <div class="card spiritual" onclick="openModal('modal-spi-4')">
+                <h3>5. Doa Kesembuhan (Diri Sendiri)</h3>
+                <span class="read-more">Selengkapnya &rarr;</span>
+            </div>
+        </div>
+    </section>
+
+    <div id="modal-pre-1" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-pre-1')">&times;</span>
+            <div class="modal-body">
+                <h2>Persiapan Sebelum Operasi</h2>
+                <img src="persiapan pre op.jpg" alt="Persiapan Pre Operasi" class="gambar-responsif">
+                <p><strong>Mengapa persiapan penting?</strong>
+                <p>Menjalani operasi medis sering kali menjadi momen yang menegangkan bagi banyak orang. Berbagai pertanyaan, kekhawatiran, hingga rasa takut terhadap prosedur yang akan dijalani adalah hal yang wajar dirasakan oleh pasien maupun keluarga. Namun, tahukah Anda bahwa persiapan yang baik sebelum operasi dapat membantu mengurangi kecemasan sekaligus meningkatkan keberhasilan tindakan medis?</p>
+                <p>Persiapan operasi bukan hanya sekadar menunggu jadwal tindakan, tetapi merupakan proses penting yang dimulai sejak pasien masuk ke ruang perawatan hingga menjelang masuk ke kamar operasi. Dukungan dari tenaga kesehatan, khususnya perawat, serta keterlibatan keluarga sangat berperan dalam membantu pasien memahami setiap tahapan yang akan dilalui. Dengan informasi yang jelas dan persiapan yang matang, pasien dapat menjalani operasi dengan lebih tenang, aman, dan percaya diri.</p>
+                <p><strong>Hal yang harus di siapkan</strong>
+                <p><strong>1. Persiapan Psikologis</strong></p>
+                <p>1) Mendekatkan diri kepada Tuhan Yang Maha Esa</p>
+                <p>2) Keluarga harus memberikan dukungan dan pendampingan kepada pasien.</p>
+                <p>3) Berdiskusi dengan Dokter, Perawat dan Pelayanan Kesehatan lainnya tentang proses pembedahan yang akan dijalani</p>
+                <p>4) Mencari informasi terkait prosedur pembedahan Mencari informasi terkait prosedur pembedahan di internet dapat menambah pengetahuan pasien, sehingga pasien lebih siap menjalani operasi</p>
+                <p><strong>2. Persiapan Fisik</strong></p>
+                <p>1) Pengkajian fisik sebelum operasi</p>
+                <p>Pemeriksaan fisik pada pasien meliputi: Identitas pasien dan riwayat penyakit pasien (riwayat penyakit yang pernah dialami termasuk riwayat kesehatan keluarga).</p>
+                <p>2) Persiapan puasa</p>
+                <p>Pasien akan dilakukan Puasa 6-8 jam sebelum tindakan anestesi/pembedahan Pembatasan asupan makanan dan minuman serta pengosongan lambung dan kolon sebelum tindakan pembedahan sangat perlu dilakukan agar: Meminimalkan kemungkinan terjadinya aspirasi pada saat dilakukannya anestesi, Dimana, pada saat pasien dalam pengaruh bius, seluruh aktivitas organ akan terhenti sementara dan jika terdapat sisa makanan didalam lambung akan menyebabkan refleks muntah. Namun, karena pasien tidak sadar maka makanan dari lambung tersebut dapat naik ke bagian tenggorokan tanpa terkontrol dan menutupi jalan nafas pasien, sehingga pasien beresiko gagal nafas. Pengosongan lambung selain mengurangi resiko gagal nafas, juga mengurangi resiko pengeluaran feses pada saat operasi, dan Menurunkan resiko terjadi mual dan muntah.</p>
+                <p>3) Persiapan diri sebelum operasi</p>
+                <p>Pencukuran pada daerah operasi ditujukan untuk menghindari terjadinya infeksi pada daerah yang dilakukan pembedahan, karena rambut yang tidak dicukur dapat menjadi tempat bersembunyi kuman dan juga mengganggu/menghambat proses penyembuhan dan perawatan luka.</p>
+                <p>4) Latihan preoperatif</p>
+                <p>Latihan preoperatif dapat berupa latihan nafas dalam, ROM dan mobilisasi dini. Latihan nafas dalam sangat bermanfaat bagi pasien untuk mengurangi nyeri setelah operasi dan dapat membantu pasien relaksasi sehingga pasien lebih mampu beradaptasi dengan nyeri, kecemasan dan dapat meningkatkan kualitas tidur. Untuk latihan gerak sendi, dilakukan pasien setelah operasi, untuk mempercepat proses penyembuhan.</p>
+                <p>Daftar Pustaka : Sandra, Ennimay, Handra, D., & Rahmanisa, T. A. (2023). Edukasi Perioperatif. Zahir Publishing.</p>
+            </div>
+        </div>
+    </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-pre-2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-pre-2')">&times;</span>
+            <div class="modal-body">
+                <h2>Puasa Sebelum Operasi</h2>
+                <img src="Puasa sebelum oeprasi.jpg" alt="Puasa sebelum Operasi" class="gambar-responsif">
+                <p>Pasien biasanya diwajibkan puasa makan dan minum selama 6 hingga 8 jam sebelum jadwal operasi. Tujuannya adalah untuk mengosongkan lambung sehingga mencegah risiko tersedak atau masuknya isi lambung ke dalam paru-paru (aspirasi) saat pasien berada di bawah pengaruh obat bius (anestesi).</p>
+                <p>Sandra, Ennimay, Handra, D., & Rahmanisa, T. A. (2023). Edukasi Perioperatif. Zahir Publishing.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-post-3" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-post-3')">&times;</span>
+            <div class="modal-body">
+                <h2>Pemenuhan Kebutuhan Nutrisi Setelah Operasi</h2>
+                <img src="Nutrisi Post Operasi.jpg" alt="Nutrisi Setelah Operasi" class="gambar-responsif">
+                <p>Setelah diizinkan makan, pasien sangat dianjurkan mengonsumsi makanan tinggi kalori dan tinggi protein (TKTP) seperti putih telur, ikan (terutama ikan gabus), daging, tempe, dan tahu. Protein sangat dibutuhkan untuk mempercepat penyembuhan jaringan luka operasi. Mitos bahwa pasien operasi tidak boleh makan telur atau ikan karena menyebabkan gatal/bernanah adalah tidak benar, kecuali pasien memiliki alergi spesifik.</p>
+                <p><strong>B. Tujuan pemenuhan nutrisi post operasi</strong></p>
+                <p class="teks-rata">1) Mempercepat penyembuhan luka.</p>
+                <p class="teks-rata">2) Mengurangi risiko infeksi.</p>
+                <p class="teks-rata">3)Menjaga keseimbangan cairan dan elektrolit.</p>
+                <p class="teks-rata">4) Menjaga kekuatan otot dan energi. </p>
+                <p class="teks-rata">5) Mendukung fungsi sistem imun. </p>
+                <p class="teks-rata">6) Mendukung fungsi sistem imun. </p>
+                <p><strong>C.Makanan yang mempercepat penyembuhan luka post operasi</strong></p>
+                <p class="teks-rata">1) Kedelai.</p>
+                <p class="teks-rata">Kedelai mengandung berbagai macam vitamin, termasuk vitamin A, C, D, E dan K yang membantu pembentukan jaringan baru. Kacang ini juga memperkuat sistem kekebalan tubuh dan meningkatkan kesehatan kulit. Kedelai juga merupakan sumber protein lengkap lantaran mengandung semua jenis asam amino esensial. Asam amino ini juga berperan penting dalam pembentukan sel-sel baru.  Berbagai khasiat ini membuat konsumsi kacang kedelai atau makanan olahannya membantu penyembuhan luka di kulit (Adriana, 2025).</p>
+                <p class="teks-rata">2) Telur.</p>
+                <p class="teks-rata"> Salah satu sumber protein yang baik untuk dikonsumsi adalah telur. Selain protein, telur juga mengandung vitamin A, vitamin B12, zinc, zat besi, dan selenium. Nutrisi yang terkandung di dalam telur tersebut mampu memperkuat imunitas tubuh, membuat luka bekas operasi cepat sembuh, dan mempercepat pemulihan tubuh secara umum (Adriana, 2025).</p>
+                <p class="teks-rata">3) Sayuran hijau.</p>
+                <p class="teks-rata">Sayuran berdaun hijau, seperti bayam, kangkung, dan sawi, mengandung vitamin C, magnesium, serta asam folat yang dapat meningkatkan kekebalan tubuh pascaoperasi (Adriana, 2025).</p>
+                <p class="teks-rata">4) Kacang-kacangan dan biji-bijian</p>
+                <p class="teks-rata">Kacang-kacangan dan biji-bijian mengandung protein, vitamin E, mangan, magnesium, dan nutrisi lainnya yang dapat menghasilkan energi serta meningkatkan fungsi sel kekebalan tubuh dalam melawan infeksi untuk mempercepat pemulihan pascaoperasi (Adriana, 2025). </p>
+                <p class="teks-rata">5) Ikan gabus</p>
+                <p class="teks-rata">Ketika tubuh mengalami luka, baik karena operasi, persalinan, atau cedera, tubuh membutuhkan asupan nutrisi tertentu untuk memperbaiki jaringan yang rusak. Nah, albumin dalam ikan gabus membantu mempercepat proses ini dengan:</p>
+<p class="teks-rata">a.) Mempercepat regenerasi sel dan jaringan</p>
+<p class="teks-rata">b.) Meningkatkan sirkulasi darah ke area yang luka.</p>
+<p class="teks-rata">c.) Mengurangi peradangan dan infeksi (Adriana, 2025)</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-post-4" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-post-4')">&times;</span>
+            <div class="modal-body">
+                <h2>Pengaturan Posisi Post Operasi</h2>
+                <p>Posisi tubuh setelah operasi disesuaikan dengan jenis operasi dan pembiusan. Misalnya, pasien dengan bius setengah badan (spinal) diwajibkan telentang rata tanpa bantal kepala selama 12-24 jam untuk mencegah sakit kepala hebat. Perawat juga akan membantu mengubah posisi pasien (miring kanan dan kiri) setiap 2 jam untuk mencegah luka lecet di punggung akibat berbaring terlalu lama.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-post-5" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-post-6')">&times;</span>
+            <div class="modal-body">
+                <h2>Manajemen Nyeri</h2>
+                <p>Manajemen nyeri merupakan suatu proses atau tindakan keperawatan yang dilakukan baik secara kolaboratif ataupun secara individu pada pasien pasca pembedahan guna mengontrol atau mengurangi nyeri serta mengendalikan rasa nyeri yang di rasa oleh pasien. Manajemen nyeri penting dilakukan dan paling tidak harus mendapat perhatian dari petugas perawat atau petugas kesehatan lainnya untuk mengurangi keluhan nyeri pada pasien. Pengendalian nyeri pada pasien pasca pembedahan dapat mengurangi keluhan serta resiko lain akibat dari nyeri. Manajemen secara individu dapat dilakukan dengan cara mengajarkan teknik distraksi dan relaksasi berupa nafas dalam dan teknik pengalihan perhatian guna mengurangi resiko nyeri pada pasien.</p>
+                <p><strong>1. Relaksasi Nafas Dalam</strong></p>
+                <embed src="Nafas dalam.pdf" type="application/pdf" width="100%" height="600px" />
+                <a href="Nafas dalam.pdf" download>Unduh Materi PDF</a>
+                <p><strong>2. Relaksasi Benson</strong></p>
+                <embed src="RELAKSASI BENSON.pdf" type="application/pdf" width="100%" height="600px" />
+                <a href="RELAKSASI BENSON.pdf" download>Unduh Materi PDF</a>
+                <p><strong>3. Terapi Akupresure</strong></p>
+                <embed src="LEAFLET Akupresure.pdf" type="application/pdf" width="100%" height="600px" />
+                <a href="LEAFLET Akupresure.pdf" download>Unduh Materi PDF</a>
+
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-post-6" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-post-7')">&times;</span>
+            <div class="modal-body">
+                <h2>Kapan Bisa Makan & Minum</h2>
+                <img src="Makan minum setelah puasa.jpg" alt="makan Setelah Operasi" class="gambar-responsif">
+                <p><Strong>Kapan Boleh Makan dan Minum Setelah Operasi?</Strong></p>
+                <p>Kapan pasien boleh makan setelah dilakukan operasi? Pasien yang telah puasa 6-8 jam sebelum operasi, kemudian operasi dilakukan sekitar 2 jam, pasien dapat mengalami rasa lemah, haus dan lapar, dan ini tentunya dapat mengurangi kenyamanan pasien. Perawat di ruangan tentunya tidak berani sembarangan memberikan makan atau minum  pada pasien setelah operasi tanpa adanya instruksi dokter. Berikut ilustrasi pasien yang dilakukan operasi (berkaitan dengan puasa): “Suster, ibu saya sudah puasa kurang lebih sepuluh jam sebelum operasi dan selama operasi. Sekarang beliau sudah sadar dan minta minum, kenapa belum boleh?. Kasihan dia kelihatan haus sekali.” Syarat pasien boleh makan setelah selesai operasi ialah:</p>
+                <p>1. Pasien sudah sadar baik. </p>
+                <p>2. Tekanan darah cukup dan denyut jantung normal. Pasien dapat mengikuti perintah dengan baik, seperti dapat menelan ludah, dapat batuk, dapat mengeluarkan lidah, dan dapat menarik nafas. </p>
+                <p>3. Jika operasi tidak didaerah usus, sekitar 2-3 jam selesai operasi pasien bisa diberikan air hangat dahulu, jika pasien dapat menelan dengan baik, maka dapat dilanjutkan dengan konsistensi yang lebih padat secara bertahap.</p>
+                <p>4. Pada operasi dengan pembiusan setengah badan, misalnya pada operasi melahirkan 2-3 jam setelah operasi, sudah dapat minum sedikit-sedikit dengan air hangat, jika pasien dapat menelan denganbaik, maka dapat dilanjutkan dengan konsistensi yang lebih padat secara bertahap.</p>
+                <p>5. Jika operasi didaerah usus, terdapat kekhususan untuk pemberian makan. Tergantung kelainan yang ditemukan sewaktu operasi dan tindakan bedah yang dilakukan terhadap usus tersebut. Pada kasus ini, dokter bedah dan dokter anestesi akan berdiskusi tentang rencana diet pada kasus ini, dan akan menyampaikan kepada keluarga tentang rencana diet/ makan pada pasien ini.</p>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-post-7" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-post-8')">&times;</span>
+            <div class="modal-body">
+                <h2>Mobilisasi Dini</h2>
+                <p>Latihan mobilisasi dan range of motion (ROM) memiliki manfaat yang besar bagi pasien, karena dapat mempercepat proses penyembuhan postoperatif. Pasien/keluarga pasien sering salah persepsi tentang pergerakan pasien postoperatif. Banyak pasien ragu-ragu untuk bergerak karena mereka takut insisi/bekas operasia menjadi lama sembuh. Pernyataan ini jelas keliru, seolah-olah pasien segera bergerak setelah operasi akan memperpanjang lama penyembuhan, namun beradasarkan riset mobilisasi dan Range Of Motion (ROM) postoperatif dapat merangsang usus (berkemih) dan mengembalikan peristaltik usus sehingga mempercepat pasien untuk kentut/flaktus.</p>
+                <p>Tahap-tahap mobilisasi dini terdiri dari:</p>
+                <p>1) Istirahat di tempat tidur harus diamati selama 6 jam pertama setelah operasi. Kemudian melakukan range of motion (ROM) dengan menggerakkan, menekuk, dan meregangkan lengan, lengan, dan kaki.</p>
+                <p>2) Setelah 6–10 jam, pasien bisa melanjutkan latihan dengan menggerakkan tubuh ke kanan dan kiri. Tujuannya adalah untuk melancarkan aliran darah dan mencegah terjadinya penggumpalan darah yang berbahaya.</p>
+                <p>3) 24 jam setelah operasi, pasien dapat melakukan duduk di tempat tidur dan duduk di tepi tempat tidur pasien.</p>
+                <p>4) Setelah 1 hari setelah operasi pasca operasi dapat belajar perlahan berjalan dan buang air kecil secara mandiri.</p>
+                <p> Sumber : Sandra, Ennimay, Handra, D., & Rahmanisa, T. A. (2023). Edukasi Perioperatif. Zahir Publishing.</p>
+            </div>
+        </div>
+    </div>
+
+     <div id="modal-post-9" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-post-9')">&times;</span>
+            <div class="modal-body">
+                <h2>perawatan Pascaoperasi</h2>
+                <img src="perawatan pascaoperasi.jpg" alt="perawatan pasca operasi" class="gambar-responsif">
+                <p>1) Istirahat Yang Cukup</p>
+                <p>Setiap orang membutuhkan masa istirahat yang cukup setelah operasi. Hal itu harus benar-benar menjadi perhatian. Masa penyembuhan adalah masa yang rentan kembali terkena penyakit. Karena itulah istirahat yang cukup bisa membantu menyembuhkan luka pasca operasi.</p>
+                <p>2) Memperhatikan kebersihan luka</p>
+                 <img src="perawatan pasca operasi.png" alt="perawatan pasca operasi" class="gambar-responsif">
+                <p>Hal-hal yang perlu dan wajib dilakukan adalah membersihkan luka operasi, mengganti secara rutin kassa yang digunakan untuk menutup luka tersebut agar tidak mengalami infeksi dan supaya luka tersebut cepat sembuh dan menutup.</p>
+                <p>3)Tidak melakukan aktivitas yang terlalu berat.</p>
+                <img src="tidak membawa barang berat.png" alt="perawatan pasca operasi" class="gambar-responsif">
+                <p>Aktivitas yang terlalu berat mampu membuat luka pasca operasi yang sudah menutup itu membuka kembali. Karena itu, dianjurkan bagi setiap individu yang baru selesai operasi dan sedang dalam masa penyembuhan pasca operasi, untuk tidak melakukan pekerjaan yang terlalu berat.</p>
+                <p>4) Gunakan Pakaian Yang Longgar Dan Nyaman</p>
+                <img src="pakaian longgar.png" alt="perawatan pasca operasi" class="gambar-responsif">
+                <p>Pakaian yang longgar memberikan ruang pada luka anda sehingga tidak terlalu tertutup. Hal ini membantu proses penyembuhan luka tersebut.</p>
+                <p> Sumber : 
+                     <p>1) Adriana, K. (2025, Januari 28). Daftar Makanan yang Dapat Membantu Pemulihan Pascaoperasi. Retrieved from Kemenkes RI: https://www.alodokter.com/daftar-makanan-yang-dapat-membantu-pemulihan-pascaoperasi</p>
+                     <p>2)  Kemenkes RI. (2022, Februari 18). Nutrisi Pada Pasien Pasca Operasi. Retrieved from Kementrian Kesehatan RI: https://rsupsoeradji.id/nutrisi-pada-pasien-pasca-operasi/</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-spi-1" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-spi-1')">&times;</span>
+            <div class="modal-body spiritual">
+                <h2>Tata Cara Tayamum</h2>
+                <P>- Tayamum dapat menggantikan fungsi wudhu 100%. Satu kali tayamum boleh digunakan untuk lebih dari satu waktu shalat, asalkan belum berhadats (contoh: jika seseorang wudhu sebelum shalat dhuhur, lalu antara waktu dhuhur dan asar dia tidak berhadats, maka tidak wajib mengulang wudhu).</P>
+                <p>- Kondisi hadats besar : jika tidak memungkinkan mandi, kedudukan mandi dapat digantikan sementara oleh tayamum. Seandainya setelah pasien bertayamum kondisi pasien memungkinkan untuk mandi, dia wajib mandi sebelum shalat karena tayamum hanya memenuhi</p>
+               <p><strong>Cara:</strong> Niat di dalam hati, tepukkan kedua telapak tangan pada permukaan yang bersih (seperti debu di dinding rumah sakit atau kaca jendela), tiup tipis kedua telapak tangan, lalu usapkan ke seluruh wajah satu kali. Tepukkan lagi kedua telapak tangan ke permukaan yang bersih, lalu usapkan ke punggung tangan kanan hingga siku, dilanjutkan tangan kiri hingga siku.</p>
+               <style>
+  .gambar-responsif {
+    max-width: 100%; /* Gambar tidak akan melebihi lebar layar */
+    height: auto;    /* Tinggi otomatis mengikuti lebar agar proporsional */
+    border-radius: 8px; /* Bonus: bikin sudutnya melengkung */
+  }
+</style>
+
+<img src="TAYAMUM.jpeg" alt="Tayamum" class="gambar-responsif">
+<p><strong>Klik Unduh disini</strong></p>
+<a href="TAYAMUM.jpeg" download>Poster Tayamum</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-spi-2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-spi-2')">&times;</span>
+            <div class="modal-body spiritual">
+                <h2>Tata Cara Sholat Saat Sakit</h2>
+                <p>Islam sangat meringankan umatnya yang sedang sakit. Jika pasien tidak mampu sholat berdiri, maka diperbolehkan sambil duduk. Jika tidak mampu duduk, boleh berbaring miring ke kanan menghadap kiblat. Jika miring pun tidak mampu, boleh dengan posisi telentang (kaki diarahkan ke kiblat dan kepala diganjal bantal agar wajah sedikit menghadap kiblat). Gerakan rukuk dan sujud cukup dilakukan dengan isyarat anggukan kepala atau kedipan mata.</p>
+            </div>
+        </div>
+    </div>
+    <div id="modal-spi-2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-spi-2')">&times;</span>
+            <div class="modal-body spiritual">
+                <h3>Tata Cara Sholat Saat Sakit</h>
+                <p>Islam sangat meringankan umatnya yang sedang sakit. Jika pasien tidak mampu sholat berdiri, maka diperbolehkan sambil duduk. Jika tidak mampu duduk, boleh berbaring miring ke kanan menghadap kiblat. Jika miring pun tidak mampu, boleh dengan posisi telentang (kaki diarahkan ke kiblat dan kepala diganjal bantal agar wajah sedikit menghadap kiblat). Gerakan rukuk dan sujud cukup dilakukan dengan isyarat anggukan kepala atau kedipan mata.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-spi-3" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-spi-3')">&times;</span>
+            <div class="modal-body spiritual">
+                <h2>Doa Menjenguk Orang Sakit</h2>
+                <style>
+  .gambar-responsif {
+    max-width: 100%; /* Gambar tidak akan melebihi lebar layar */
+    height: auto;    /* Tinggi otomatis mengikuti lebar agar proporsional */
+    border-radius: 8px; /* Bonus: bikin sudutnya melengkung */
+  }
+</style>
+
+<img src="Doa Menjenguk orang sakit.png" alt="Menjenguk orang sakit" class="gambar-responsif">
+                <p>Membaca doa untuk meminta kesembuhan saudara/kerabat yang sedang sakit sangat dianjurkan. Salah satu doa yang diajarkan Rasulullah SAW:</p>
+                <p><em>"Allahumma rabban naas mudzhibal ba'si isyfi antasy-syaafii laa syafiya illaa anta syifaa'an laa yughaadiru saqomaa."</em></p>
+                <p><strong>Artinya:</strong> “Ya Allah Wahai Tuhan segala manusia, hilangkanlah penyakitnya, sembukanlah ia. (Hanya) Engkaulah yang dapat menyembuhkannya, tidak ada kesembuhan melainkan kesembuhan dari-Mu, kesembuhan yang tidak kambuh lagi.”
+                  <style>
+  .gambar-responsif {
+    max-width: 100%; /* Gambar tidak akan melebihi lebar layar */
+    height: auto;    /* Tinggi otomatis mengikuti lebar agar proporsional */
+    border-radius: 8px; /* Bonus: bikin sudutnya melengkung */
+  }
+
+</style>
+         <p class="teks-rata">Al-Badr, S. A. bin A. M. (n.d.). Doa-doa bagi orang sakit dan yang tertimpa musibah..</p>
+         <p class="teks-rata">Firdaus, A. A., Yudhitama, I., & Indrawan, T. (2017). Panduan Bersuci dan Shalat bagi Orang Sakit. Qosim.</p>
+</p> 
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-spi-4" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-spi-4')">&times;</span>
+            <div class="modal-body spiritual">
+                <h2>Doa Kesembuhan (Untuk Diri Sendiri)</h2>
+                <p>Pasien dianjurkan untuk terus berdoa memohon kesembuhan. Caranya dengan meletakkan tangan di bagian tubuh yang sakit (luka operasi/area nyeri), lalu membaca <strong>"Bismillah"</strong> sebanyak 3 kali, dilanjutkan membaca doa berikut sebanyak 7 kali:</p>
+                <p><em>"A'udzu billahi wa qudrotihi min syarri maa ajidu wa uhaadziru."</em></p>
+                <p><strong>Artinya:</strong> “Aku berlindung kepada Allah dan kekuasaan-Nya dari keburukan yang sedang aku rasakan dan yang aku khawatirkan.”
+                    </style>
+<h2>Hadist Memohon Kesembuhan</h2>
+<img src="hadis memohon kesembuhan.png" alt="hadis memohon kesembuhan" class="gambar-responsif">
+                <p><strong>Artinya:</strong> “Sesungguhnya Rasulullah Shallallahu ‘alaihi wa Sallam apabila mengeluh sakit, beliau membacakan untuk dirinya Mu’awwidzaat lalu beliau meludah. Dan apabila sakitnya bertambah aku ikut membacakannya untuk beliau dan aku mengusap dengan tangan beliau karena mengharapkan barakahnya.” (H.R Bukhari dan Muslim) Maksudnya adalah dengan membacakan surat Al-Ikhlash, surat Al-Falaq, dan surat An-Naas.”
+             <style>
+  .gambar-responsif {
+    max-width: 100%; /* Gambar tidak akan melebihi lebar layar */
+    height: auto;    /* Tinggi otomatis mengikuti lebar agar proporsional */
+    border-radius: 8px; /* Bonus: bikin sudutnya melengkung */
+  }
+</style>
+<h2>Al-Ikhlash</h2>
+<img src="Al Ikhlas.png" alt="Al Ikhlash" class="gambar-responsif">
+                <p><strong>Artinya:</strong> “Artinya: Katakanlah (Muhammad), "Dialah Allah, Yang Maha Esa. Allah tempat meminta segala sesuatu. (Allah) tidak beranak dan tidak pula diperanakkan. Dan tidak ada sesuatu yang setara dengan Dia." (QS Al- Ikhlash: 1-4)
+
+.” 
+                <style>
+  .gambar-responsif {
+    max-width: 100%; /* Gambar tidak akan melebihi lebar layar */
+    height: auto;    /* Tinggi otomatis mengikuti lebar agar proporsional */
+    border-radius: 8px; /* Bonus: bikin sudutnya melengkung */
+  }
+</style>
+<h2>Al-Falaq</h2>
+<img src="al Falaq.png" alt="al Falaq" class="gambar-responsif">
+                <p><strong>Artinya:</strong> “Artinya: Katakanlah, "Aku berlindung kepada Tuhan yang menguasai subuh (fajar), dari kejahatan (makhluk yang) Dia ciptakan, dan dari kejahatan malam apabila telah gelap gulita, dan dari kejahatan (perempuan-perempuan) penyihir yang meniup pada buhul-buhul (talinya), dan dari kejahatan orang yang dengki apabila dia dengki." (QS Al Falaq: 1-5)”
+                <style>
+  .gambar-responsif {
+    max-width: 100%; /* Gambar tidak akan melebihi lebar layar */
+    height: auto;    /* Tinggi otomatis mengikuti lebar agar proporsional */
+    border-radius: 8px; /* Bonus: bikin sudutnya melengkung */
+  }
+</style>
+<h2>An-Naas</h2>
+<img src="an nas.png" alt="an nas" class="gambar-responsif">
+                <p><strong>Artinya:</strong> “Artinya: “Aku berlindung kepada Tuhan (yang memelihara dan menguasai) manusia. Raja manusia. Sembahan manusia. Dari kejahatan (bisikan) syaitan yang biasa bersembunyi, yang membisikkan (kejahatan) ke dalam dada manusia, dari (golongan) jin dan manusia." (QS An Nas: 1–6)” 
+                <p><strong>Daftar Pustaka:</strong>
+                    <style>
+  .teks-rata {
+    text-align: justify;
+  }
+</style>
+         <p class="teks-rata">Al-Badr, S. A. bin A. M. (n.d.). Doa-doa bagi orang sakit dan yang tertimpa musibah..</p>
+         <p class="teks-rata">Firdaus, A. A., Yudhitama, I., & Indrawan, T. (2017). Panduan Bersuci dan Shalat bagi Orang Sakit. Qosim.</p>
+</p> 
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-spi-5" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-spi-5')">&times;</span>
+            <div class="modal-body spiritual">
+                <h2>Kaidah umum tentang bersuci dari hadats </h2>
+                <p>1) Pada dasarnya orang yang sakit wajib ber-thaharah menggunakan air dengan berwudhu untuk menghilangkan hadats kecil dan mandi untuk menghilangkan hadats besar.</p>
+                <p>2) Jika tidak mampu menggunakan air karena khawatir sakit semakin bertambah parah atau kesembuhan semakin lama maka diperbolehkan untuk bertayamum.</p>
+                <p>3) Jika tidak mampu ber-thaharah sendiri bisa diwudhukan atau ditayamumkan oleh orang lain.</p>
+                <p>4) Seseorang yang wajib berwudhu, namun tidak dapat berwudhu karena sakit, dan tidak ada yang dapat mewudhukannya kecuali lawan jenis yang bukan mahram, maka pasien tersebut ditayamumkan.</p>
+                <h2>Bagaimana cara bersuci dari hadats bagi pasien dengan kateter urin?</h2>
+                <img src="Jawaban kateter urine.png" alt="Bagaimana cara bersuci dari hadats bagi pasien dengan kateter urin? " class="gambar-responsif">
+                <p> <strong>Bersuci bagi pasien yang menggunakan kateter:</strong></p>
+                <p>- Bersuci dari hadats setiap masuk waktu shalat wajib.</p>
+                <p>- Wudhu/tayamum dianggap sah jika dilakukan setelah masuk waktu shalat wajib.</p>
+                <p>- Wudhu/tayamum tidak batal dengan keluarnya urin, namun batal dengan berak dan kentut.</p>
+                <p>- Satu kali bersuci berlaku untuk satu rangkaian shalat (contoh rangkaian shalat: shalat isya dan ba'diyah isya; shalat maghrib dijamak dengan shalat isya).</p>
+                <h2>Bagaimana cara pasien yang menggunakan kolostomi bersuci dari hadats?</h2>
+                <p>Pembahasan cara bersuci pada pasien dengan kolostomi pada dasarnya sama dengan pasien yang menggunakan kateter. Ada dua rincian:</p>
+                <p> <strong>a) Pasien terus menerus mengeluarkan feses</strong></p>
+                <p>Cara bersuci pasien dengan kolostomi yang terus menerus mengeluarkan feses seperti cara bersuci pasien dengan kateter urin (kasus سلس البول)sebagai berikut.</p>
+                <p>- Bersuci dari hadats setiap masuk waktu shalat.</p>
+                <p>- Wudhu/tayamum dianggap sah jika dilakukan setelah masuk waktu shalat.</p>
+                <p>- Wudhu/tayamum tidak batal dengan keluarnya feses, namun batal dengan kencing dan kentut.</p>
+                <p><strong>b) Pasien mengeluarkan feses secara periodik (misal 30 menit sekali)</strong></p>
+                <P>Jika keluarnya feses tidak terjadi terus menerus, maka kewajiban bersuci dari hadats seperti orang sehat. Keluarnya feses mewajibkan pasien untuk bersuci dari hadats.</P>
+            </div>
+        </div>
+    </div>
+
+
+    <section id="kontak" style="text-align:center; padding: 50px 20px; background: #fff;">
+        <h2 class="section-title">KONTAK</h2>
+        <p>Hubungi kami untuk informasi lebih lanjut seputar pelayanan Nusa Indah 2.</p>
+        <p>📍 Jl. Raya Tugurejo No.1, Semarang</p>
+    </section>
+
+    <section id="tim-kreatif" style="text-align:center; padding: 50px 20px; background: var(--bg-light);">
+        <h2 class="section-title">TIM KREATIF</h2>
+        <footer>
+        <p>&copy; 2026 EDUCARE NUSIN 2 - RSUD dr. Adhyatma, MPH x Universitas Muhammadiyah Pekajangan Pekalongan. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+    </script>
+
+
+
+</body>
+</html>
